@@ -70,15 +70,25 @@ For this, you need to implement the "IRepository" interface, which will be repso
 
 There is currently no library available, which allows developers to easily create tokens in java and to deploy them to Ethereum. Even a simple library will be a big contribution to the community :)
 
+### Important Interfaces
+
+* IRepository: interface to talk with the underlying database. 
+
 ## Challenge 2
 In this challenge, you will impelement a own custom operation, which can be performed with a token. 
-For this you need to implement the Operation interface, create your own action(s), which this operation support, and the proof for the operations. 
+For this you need to implement the Operation interface, create your own action(s), which this operation support, and the type of proof needed to show that one performed the action.
 
 For the start, you can use the SQLite implementation of the IRepository interface and assume, that your operations etc. are stored on the DLT (i.e. Ethereum). 
 In practice, you will need to add some functions/ tables to the SQLite database. Look at the example code for hints how you can do this (in case of questions, just ask us). 
 
 In the end, you will need to add your operation as a feature to the "Token Creator". 
 Afterwards you will be able to test your token on the phone :)
+
+### Important interfaces
+
+* IAction: Something which can be performed (a behavior). I.e. it can represent planting a tree.
+* IClaim: Represents a claim of a performed action. I.e. It could hold Marcus (resp. his publickey) as a field and the performed action (planting tree), together with a proof (i.e the signature of an oracle, which aproves that the action was performed by markcus). 
+* IOperation: The class is responsible to create actions and which evaluates if a claim of an action is valid (i.e. evaluating the proof). In this case, it will write the action to the database/ DLT (i.e. Ethereum). Moreover it is repsonsible for rewarding participants, when a claim is evaluated as true. 
 
 
 
