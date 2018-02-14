@@ -87,8 +87,8 @@ Afterwards you will be able to test your token on the phone :)
 ### Important interfaces
 
 * IAction: Something which can be performed (a behavior). I.e. it can represent planting a tree.
-* IClaim: Represents a claim of a performed action. I.e. It could hold Marcus (resp. his publickey) as a field and the performed action (planting tree), together with a proof (i.e the signature of an oracle, which aproves that the action was performed by markcus). 
-* IOperation: The class is responsible to create actions and which evaluates if a claim of an action is valid (i.e. evaluating the proof). In this case, it will write the action to the database/ DLT (i.e. Ethereum). Moreover it is repsonsible for rewarding participants, when a claim is evaluated as true. 
+* IClaim: Represents a claim of a performed action. I.e. It could hold Marcus (resp. his publickey) as a field and the performed action (planting tree), together with a proof (i.e the signature of an oracle, which aproves that the action was performed by marcus). 
+* IOperation: The class is responsible to create actions and which evaluates if a claim of an action is valid (i.e. evaluating the proof). In this case, it will write the action to the database/ DLT (i.e. Ethereum). Moreover it is repsonsible for rewarding participants, when a claim is evaluated as true. High-level one can think about it as something which addresses a specific problem, respectively, which is the solution of a specific problem. I.e. Having more green spaces in town (solution to a unlively urban environment). Hence this operation can generate different actions: plant a tree, plant flowers, do not cut trees etc. And take claims of this actions as an input.
 
 
 
