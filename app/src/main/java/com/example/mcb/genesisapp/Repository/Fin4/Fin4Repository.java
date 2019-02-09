@@ -1,10 +1,9 @@
 package com.example.mcb.genesisapp.Repository.Fin4;
 
-import android.content.Context;
-import android.util.Base64;
+
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
+
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -13,7 +12,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpClientStack;
 import com.android.volley.toolbox.HttpStack;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mcb.genesisapp.Repository.SQLite.BasicSQLiteRepo;
 import com.example.mcb.genesisapp.State.StateCallback;
@@ -25,43 +23,41 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 
-import java.security.acl.LastOwnerException;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Features.IFeature;
-import Features.IOperation;
-import Features.IUnderlying;
-import Features.operations.IOperationProof;
-import Features.operations.actions.IAction;
+
+
 import Features.properties.IProperty;
 import Features.properties.basic.DecimalsProperty;
 import Features.properties.basic.GeneralSupplyProperty;
 import Features.properties.basic.GenesisSupplyProperty;
 import Features.properties.basic.NameProperty;
 import Features.properties.basic.SymbolProperty;
-import Repository.IRepository;
-import Token.IToken;
 import Token.basic.BasicToken;
-import Utilities.IAddress;
+
 
 public class Fin4Repository extends BasicSQLiteRepo implements IFin4Repo {
 
-   // protected String   serverUrl ="http://10.0.2.2:3000"; // talks with a local instance of fin4, please refere to: https://github.com/FuturICT2/fin4-core
-    protected String serverUrl = "http://www.finfour.net"; //talks with the live instance of fin4 server
+
+
+    //protected String   serverUrl ="http://10.0.2.2:3000"; // talks with a local instance of fin4, needs the android emulator (not mobile phone) please refere to: https://github.com/FuturICT2/fin4-core
+    protected String serverUrl = "http://www.finfour.net"; //talks with the live instance of fin4 server (wwww.finfour.net), needs to run on an android phone connected via USB
+
     RequestQueue queue;
 
+    /*
+        Just for demonstration purposes Todo: generalize User
+     */
     protected String name="dummyUser";
     protected String email="dummyUser@ethz.ch";
     protected String pwd="resUymmud";
 
-    protected JSONObject _response;
-    protected JSONObject _responseRegister;
-    protected JSONObject _responseLogin;
-    protected String _rawCookie;
+
 
     protected boolean loginFinished = false;
 
@@ -76,10 +72,7 @@ public class Fin4Repository extends BasicSQLiteRepo implements IFin4Repo {
     public Fin4Repository(StateCallback stateCallback) {
         super(stateCallback);
         this.stateActivity = stateCallback;
-        //postRegister();
-        postLogin();
-
-
+        postRegister(); // just for demonstration purposes, try to register every time, after his is finished, postLogin is called
 
     }
 
@@ -119,57 +112,26 @@ public class Fin4Repository extends BasicSQLiteRepo implements IFin4Repo {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Toast.makeText(getContext(),"success: " + response.toString(), Toast.LENGTH_LONG).show();
-                        _responseRegister =response;
+                        Toast.makeText(getContext(),"Register success: " + response.toString(), Toast.LENGTH_SHORT).show();
+                        postLogin(); // just for demonstration purposes, it works!
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
-                        Toast.makeText(getContext(),"Register failor: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getContext(),"failor: " + error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"Register failure: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        postLogin();
                     }
                 });
 
 
 
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, serverUrl,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(getContext(),"success: " + response.toString(), Toast.LENGTH_LONG).show();
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(),"failor: " + error.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-
-        // /api/status funktionier!
-
-        StringRequest stringRequest2 = new StringRequest(Request.Method.GET, serverUrl+"/wapi/csrf",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(getContext(),"success: " + response.toString(), Toast.LENGTH_LONG).show();
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(),"failor: " + error.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
 
 
 
         getQueue().add(jsonObjectRequest);
-       //queue.add(stringRequest2);
+
 
 
     }
@@ -183,7 +145,7 @@ public class Fin4Repository extends BasicSQLiteRepo implements IFin4Repo {
                     @Override
                     public void onResponse(JSONObject response) {
                         // mTextView.setText("Response: " + response.toString());
-                        Toast.makeText(getContext(),"success: " + response.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"CSRF success: " + response.toString(), Toast.LENGTH_SHORT).show();
                         HashMap<String, String> params = new HashMap<String, String>();
                         try{
                             params.put("X-Csrf-Token",response.getString("token"));
@@ -197,8 +159,7 @@ public class Fin4Repository extends BasicSQLiteRepo implements IFin4Repo {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
-                        Toast.makeText(getContext(),"failor: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getContext(),"failor: " + error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"CSRF failure: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -222,8 +183,7 @@ public class Fin4Repository extends BasicSQLiteRepo implements IFin4Repo {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Toast.makeText(getContext(),"success: " + response.toString(), Toast.LENGTH_LONG).show();
-                        _responseLogin = response;
+                        Toast.makeText(getContext(),"Login success: " + response.toString(), Toast.LENGTH_SHORT).show();
                         loginFinished =true;
 
 
@@ -233,8 +193,8 @@ public class Fin4Repository extends BasicSQLiteRepo implements IFin4Repo {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
-                        Toast.makeText(getContext(),"failor: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getContext(),"failor: " + error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"Login failure: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
                 }){
             @Override
@@ -270,16 +230,15 @@ public class Fin4Repository extends BasicSQLiteRepo implements IFin4Repo {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Toast.makeText(getContext(),"success: " + response.toString(), Toast.LENGTH_LONG).show();
-                        _responseLogin = response;
+                        Toast.makeText(getContext(),"Session success: " + response.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
-                        Toast.makeText(getContext(),"failor: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getContext(),"failor: " + error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"Session failure: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
@@ -341,8 +300,7 @@ public class Fin4Repository extends BasicSQLiteRepo implements IFin4Repo {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Toast.makeText(getContext(),"success: " + response.toString(), Toast.LENGTH_LONG).show();
-                        _responseLogin = response;
+                        Toast.makeText(getContext(),"get Token success: " + response.toString(), Toast.LENGTH_LONG).show();
                         JSONArray array = new JSONArray();
                         try {
                             array = response.getJSONArray("Entries");
@@ -394,8 +352,7 @@ public class Fin4Repository extends BasicSQLiteRepo implements IFin4Repo {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
-                        Toast.makeText(getContext(),"failor: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getContext(),"failor: " + error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"getToken failure: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 

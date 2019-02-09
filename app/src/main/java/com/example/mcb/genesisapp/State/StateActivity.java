@@ -327,11 +327,6 @@ public class StateActivity extends AppCompatActivity implements StateCallback{
     }
 
 
-
-
-
-
-
     protected void handleIntent(Intent intent){
         Bundle bundle = new Bundle();
         if (intent != null) {
