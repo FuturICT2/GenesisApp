@@ -102,7 +102,9 @@ Afterwards you will be able to test your token on the phone :)
 I a different repository, the [ fin4 ](https://github.com/FuturICT2/fin4-core) is found. This server is the core of the finance 4.0 infrastructure. It provides amongst others necessary APIs and business logic to deploy tokens, actions and claims to blockchain systems. 
 Clients can communicate with this server via the http protocol. 
 
-As described in 
+As described [ before ](#biots_challenge_1), in order to connect the GenesisApp with a Blockchain system (and to deploy tokens "globally" and not just "locally") one needs to replace SQLlite database ([BasicSQLiteRepository](https://github.com/FuturICT2/GenesisApp/tree/master/app/src/main/java/com/example/mcb/genesisapp/Repository/SQLite)) with a Blockchain "database".
+
+How this can be done, is demonstrated in the 
 A small Fin4 Repository has been added, which showcases how one can communicate via http requests with the [ fin4 server ]. 
 
 
