@@ -114,12 +114,17 @@ Currently, the GenesisApp uses the Fin4Repository as a default. In order to chan
   <img src="./img/getRepoFunction.png" width="800"/>
 </p>
 
-The Fin4Repository can either talk with the life instance of the fin4 server (Elm webapp: www.finfour.net) or a local instance of the fin4 server ([instructions] (https://github.com/FuturICT2/fin4-core)). 
+The Fin4Repository can either talk with the life instance of the fin4 server (Elm webapp: www.finfour.net) or a local instance of the fin4 server ([instructions](https://github.com/FuturICT2/fin4-core)). 
 Using Android Studios, one can either test code in an emulator or an android phone which is connected via usb with the pc. Currently, the emulator works only with a locally deployed fin4 server and an android works only with the life instance of the server. One can specify this in the Fin4Repository via commenting/ uncommenting the following lines:
 <p align="center">
   <img src="./img/serverUrl.png" width="800"/>
 </p>
 
+In order to fetch tokens from the fin4 server, which are then shown in the wallet of the Genesis app, one needs to click on the "Genesis" logo in the top right:
 
+<p align="center">
+  <img src="./img/app_before_genesis_2.png" width="350"/>
+  <img src="./app_after_genesis.png" width="350"/>
+</p>
 
 # Software Architecture
