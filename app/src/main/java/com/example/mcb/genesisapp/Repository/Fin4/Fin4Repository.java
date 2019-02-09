@@ -27,9 +27,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Set;
 
 
 import Features.properties.IProperty;
@@ -59,11 +60,11 @@ public class Fin4Repository extends BasicSQLiteRepo implements IFin4Repo {
 
     protected boolean loginFinished = false;
 
-
+    protected boolean firstTimeGetAll =true;
 
 
     boolean tokenUpToDate=false;
-    List<BasicToken> allTokens = new ArrayList<>();
+    Set<BasicToken> allTokens = new HashSet<>();
 
     protected StateCallback stateActivity;
 
@@ -387,6 +388,10 @@ public class Fin4Repository extends BasicSQLiteRepo implements IFin4Repo {
 
     @Override
     public Collection<BasicToken> getAllTokens() {
+        if(firstTimeGetAll) {
+            this.allTokens.addAll(super.getAllTokens());
+            firstTimeGetAll = false;
+        }
         if(!tokenUpToDate && loginFinished){
             this.getTokens();
         }
