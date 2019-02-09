@@ -43,8 +43,6 @@ import Token.basic.BasicToken;
 
 public class Fin4Repository extends BasicSQLiteRepo implements IFin4Repo {
 
-
-
     //protected String   serverUrl ="http://10.0.2.2:3000"; // talks with a local instance of fin4, needs the android emulator (not mobile phone) please refere to: https://github.com/FuturICT2/fin4-core
     protected String serverUrl = "http://www.finfour.net"; //talks with the live instance of fin4 server (wwww.finfour.net), needs to run on an android phone connected via USB
 
