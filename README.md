@@ -50,7 +50,7 @@ tokens in this view. Moreover, projects can be listed, on which the user can spe
 </p>
 
 
-# How to utilize the App to implement your own Functionalities (BIOTS Challenges)
+# How to utilize the App to implement your own Functionalities (BIOTS Challenges 2018 - still interesting for BETH 2019)
 
 In the following, we briefly explain, how the Genesis AndroidApp and the Genesis library can be used to boost your development process. 
 
