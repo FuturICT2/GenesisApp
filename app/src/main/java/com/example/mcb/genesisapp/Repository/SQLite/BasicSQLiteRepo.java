@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.mcb.genesisapp.State.StateCallback;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -32,7 +34,7 @@ import Utilities.IAddress;
  * Created by mcb on 11.02.18.
  */
 
-public class BasicSQLiteRepo implements IRepository<BasicToken>, SQLiteRepo {
+public class BasicSQLiteRepo implements IRepository<BasicToken>, ISQLiteRepo {
 
 
     private Context context;
@@ -40,8 +42,8 @@ public class BasicSQLiteRepo implements IRepository<BasicToken>, SQLiteRepo {
     private BasicOpenHelper basicDBHelper;
 
 
-    public BasicSQLiteRepo(Context context) {
-        this.context = context;
+    public BasicSQLiteRepo(StateCallback stateCallback) {
+        this.context = stateCallback.getContext();
         basicDBHelper = BasicOpenHelper.getInstance(context);
         open();
     }

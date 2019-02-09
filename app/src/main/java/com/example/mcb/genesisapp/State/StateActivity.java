@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import android.widget.ViewSwitcher;
 
 import com.example.mcb.genesisapp.Layers.base.FBaseList;
 import com.example.mcb.genesisapp.R;
+import com.example.mcb.genesisapp.Repository.Fin4.Fin4Repository;
 import com.example.mcb.genesisapp.Repository.SQLite.BasicSQLiteRepo;
 
 
@@ -244,30 +246,22 @@ public class StateActivity extends AppCompatActivity implements StateCallback{
     }
 
 
-
-
+    /**
+     * Entry into App
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);*/
         setContentView(R.layout.activity_state);
-        // AndroidBug5497Workaround.assistActivity(this);
 
-//        LoggingApplication app = (LoggingApplication) getApplication();
-
-        // mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         this.repo = getRepository();
-        //dataSource.open();
-        // back navigation history
+
         pageHistory = new Stack<>();
         sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
-        /* Intent intent = new Intent(this, ShortIntroActivity.class);
-        startActivity(intent); */
 
         myListeners = new ArrayList<>();
 
@@ -298,60 +292,28 @@ public class StateActivity extends AppCompatActivity implements StateCallback{
                 CURRENT_STATE = savedInstanceState.getInt("CurrentState", BASE_LIST);
             }
 
-            /********************************
-             * set up Search
-             */
 
-            TextView nettiTitle = (TextView) findViewById(R.id.state_activity_netti_logo_txtv);
-            //  nettiTitle.setTypeface(HelperFunctions.getLatoFont(getApplicationContext()));
-            //  nettiTitle.setTextColor(getContext().getResources().getColor(android.R.color.white));
-            nettiTitle.setOnClickListener(new View.OnClickListener() {
+
+            TextView genesisView = (TextView) findViewById(R.id.state_activity_netti_logo_txtv);
+            genesisView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    Toast.makeText(getContext(),"Statistics Layer is coming soon",Toast.LENGTH_LONG).show();
-                    // displayView(StateCallback.EXPLORE_LAYER, true);
+                public void onClick(View view) {
+                    ((Fin4Repository)getRepository()).getTokens();
                 }
             });
 
-            TextView exportTitle = (TextView) findViewById(R.id.state_activity_netti_export_txtv);
-//            exportTitle.setTypeface(HelperFunctions.getLatoFont(getApplicationContext()));
+            ImageButton button = (ImageButton) findViewById(R.id.state_activity_search_button);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((Fin4Repository)getRepository()).setCSRF();
+                    //penWebLinkInBrowser("http://10.0.2.3:8888");
+                }
+            });
 
 
 
 
-
-
-            //  setUpSearch((CircleSearchViewNew) findViewById(R.id.state_activity_search_circle_view));
-            setUpSwitcher((ViewSwitcher) findViewById(R.id.state_activity_search_view_switcher));
-
-
-
-
-            // fabPlusMenu.setIconAnimated(false);
-            //fabSearch = (FABsearch) findViewById(R.id.fab_search);
-
-
-            //sheet which pops up when search button is klicked
-            // transitionSheet = (SheetLayout) findViewById(R.id.bottom_sheet);
-            // transitionSheet.setFab(fabSearch);
-            // transitionSheet.setFabAnimationEndListener(this);
-
-
-//            fabSearch.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (transitionSheet != null) {
-//                        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context
-//                                .INPUT_METHOD_SERVICE);
-//                        imm.toggleSoftInputFromWindow(getCurrentFocus().getApplicationWindowToken(),
-//                                InputMethodManager
-//                                        .SHOW_FORCED, 0);
-//                        transitionSheet.expandFab();
-//                    }
-//                    displayView(StateCallback.SEARCH_LAYER,true);
-//
-//                }
-//            });
 
             fragmentManager = getSupportFragmentManager();
 
@@ -406,27 +368,6 @@ public class StateActivity extends AppCompatActivity implements StateCallback{
 
     private void setUpSwitcher(ViewSwitcher viewSwitcher) {
 
-//        this.searchSwitcher = viewSwitcher;
-//
-//        this.searchButton = (ImageView) viewSwitcher.findViewById(R.id.state_activity_search_button);
-//        this.searchButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                searchSwitcher.setDisplayedChild(1);
-//                openKeyBoard();
-//                searchAutoComplete.showDropDown();
-//                searchAutoComplete.requestFocus();
-//                searchAutoComplete.showDropDown();
-//            }
-//        });
-//        this.searchAutoComplete = (AutoCompleteTextView) viewSwitcher.getNextView();
-//        this.searchAutoComplete.setThreshold(0);
-//        this.searchAdapter = new SearchAdapter(this);
-//        //   this.searchAdapter = new BoxSearchAdapter(this);
-//        this.searchAutoComplete.setAdapter(this.searchAdapter);
-//        this.searchAdapter.setConnectedEditText(this.searchAutoComplete);
-//        this.searchAutoComplete.setOnItemClickListener(this);
-//        getSupportLoaderManager().initLoader(ALL_CONCRETE_OBJECTS_LOADER, null, this);
 
     }
 
@@ -453,8 +394,8 @@ public class StateActivity extends AppCompatActivity implements StateCallback{
     @Override
     public IRepository getRepository() {
         if (this.repo == null) {
-          this.repo = new BasicSQLiteRepo(getContext()); // needs to be exchanged if other Database (like Blockchain is added)
-
+          //this.repo = new BasicSQLiteRepo(this); // needs to be exchanged if other Database (like Blockchain is added)
+            this.repo = new Fin4Repository(this);
         }
         return this.repo;
     }
@@ -534,34 +475,7 @@ public class StateActivity extends AppCompatActivity implements StateCallback{
     }
 
 
-//    @Override
-//    public Loader<List<Thing>> onCreateLoader(int id, Bundle args) {
-//
-//        switch (id) {
-//            case ALL_CONCRETE_OBJECTS_LOADER:
-//                return new AllConcreteObjectsLoader(getContext(), getRepository());
-//            default:
-//                return new ConcreteObjectDataLoader(getContext(), getRepository(), Types
-//                        .human);
-//
-//        }
-//
-//    }
-//
-//    @Override
-//    public void onLoadFinished(Loader<List<Thing>> loader, List<Thing> data) {
-//
-//        searchAdapter.setResultThingList(data);
-//        searchAdapter.notifyDataSetChanged();
-//
-//
-//
-//    }
-//
-//    @Override
-//    public void onLoaderReset(Loader<List<Thing>> loader) {
-//
-//    }
+
 
     @Override
     public void dataBaseModified() {

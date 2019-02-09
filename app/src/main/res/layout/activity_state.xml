@@ -20,11 +20,7 @@
             android:background="@color/white">
 
 
-            <ViewSwitcher
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:id="@+id/state_activity_search_view_switcher">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -81,7 +77,7 @@
                     android:id="@+id/state_activity_auto_complete_txtv"/>
 -->
 
-            </ViewSwitcher>
+
 
 
         </LinearLayout>

@@ -18,6 +18,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {
@@ -33,4 +34,5 @@ dependencies {
     compile 'com.simplecityapps:recyclerview-fastscroll:1.0.9'
     compile 'com.eftimoff:android-viewpager-transformers:1.0.1@aar' // used in FDetailPagesViewPager
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar' // used i.e. in fbaselist
+    compile 'com.android.volley:volley:1.1.1' // http request
 }

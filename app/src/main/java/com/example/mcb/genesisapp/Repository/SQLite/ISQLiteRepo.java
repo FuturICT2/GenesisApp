@@ -7,7 +7,7 @@ import android.database.SQLException;
  * Android native SQLite functions for Genesis App
  * Created by mcb on 11.02.18.
  */
-public interface SQLiteRepo {
+public interface ISQLiteRepo {
 
     /**
      * Context of Android applciation
