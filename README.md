@@ -109,9 +109,15 @@ How this can be done, is demonstrated with the [ Fin4Repository ](https://github
 This repository extends the BasicSQLiteRepo and implements the IFin4Repo interface. Both, the Fin4Repository and the IFin4Repo are not very sophisticated and just there to showcase how an android app can communicate with the fin4 server via http.
 
 ## Usage 
-In order 
+Currently, the GenesisApp uses the Fin4Repository as a default. In order to change back to the BasciSQLiteRepo, one needs to comment and uncomment the specific lines in the StateActivity, as depicted: 
 <p align="center">
-  <img src="./img/getRepoFunction.png" width="350"/>
+  <img src="./img/getRepoFunction.png" width="800"/>
+</p>
+
+The Fin4Repository can either talk with the life instance of the fin4 server (Elm webapp: www.finfour.net) or a local instance of the fin4 server ([instructions] (https://github.com/FuturICT2/fin4-core)). 
+Using Android Studios, one can either test code in an emulator or an android phone which is connected via usb with the pc. Currently, the emulator works only with a locally deployed fin4 server and an android works only with the life instance of the server. One can specify this in the Fin4Repository via commenting/ uncommenting the following lines:
+<p align="center">
+  <img src="./img/serverUrl.png" width="800"/>
 </p>
 
 
