@@ -6,10 +6,10 @@ It uses the Genesis Library. If you are interested in the library, check out: ww
 # Content
 
 - [Installation](#installation)
-- [App Functions](#app_functions)
+- [App Functions](#appfunctions)
 - [First Run](#first_run)
-- [Implement own functionalities](#own_functionalities)
-- [Http requests to Fin4 server](#fin4_repo)
+- [Implement own functionalities](#ownfunctionalities)
+- [Http requests to Fin4 server](#fin4repo)
 
 
 <a name=installation/>
@@ -22,7 +22,7 @@ It uses the Genesis Library. If you are interested in the library, check out: ww
 * Connect a phone through usb to your pc or start an emulator
 * Run the project, it will be deployed to your phone or emulator
 
-<a name=app_functions/>
+<a name=appfunctions/>
 # Functions of GenesisApp
 
 The app currently consists of four views. These will be explained in the following. 
@@ -51,7 +51,7 @@ In Challenge 2, you can use this view to test your implementation and to integra
 In future, the user will be able to trade his or her
 tokens in this view. Moreover, projects can be listed, on which the user can spend his or her tokens (crowdsourcing etc.)
  
- <a name=first_run/>
+ <a name=firstrun/>
 # First Run
 * after starting the app, you will see your empty wallet
 * swipe left to the Creator
@@ -63,7 +63,7 @@ tokens in this view. Moreover, projects can be listed, on which the user can spe
   <img src="./screenWallet.png" width="350"/>
 </p>
 
-<a name=own_functionalities/>
+<a name=ownfunctionalities/>
 # How to utilize the App to implement your own Functionalities (BIOTS Challenges 2018 - still interesting for BETH 2019)
 
 In the following, we briefly explain, how the Genesis AndroidApp and the Genesis library can be used to boost your development process. 
@@ -75,7 +75,7 @@ We often got asked, how to differentiate between the two challenges. In the next
 * Token obtainer: extend the Operation interface and implement actions and proofs to account for your problem, which you want to solve through incentivizing a specific behavior/ action. This challenge is more about utilizing IoT and oracles to validate if an action has actually happened. For this challenge you can pretend, that the android application is storing everythin to a DLT (i.e. Ethereum) (use it as a black box). It is a IoT/ Oracle intense challenge.
 
 Of course, both parts can be combined and this would be the ultimate killer applciation ;)
-<a name=biots_challenge_1/>
+<a name=biotschallenge_1/>
 ## Challenge 1
 
 For this challenge, you can use the android application as it is and try to replace the SQLite database with a DLT (i.e. Ethereum). Some basic properties can already be defined inside the app. Hence, you can start with bringing these properties to the blockchain and afterwards think about more complex properties etc. 
@@ -104,7 +104,7 @@ Afterwards you will be able to test your token on the phone :)
 * IClaim: Represents a claim of a performed action. I.e. It could hold Marcus (resp. his publickey) as a field and the performed action (planting tree), together with a proof (i.e the signature of an oracle, which aproves that the action was performed by marcus). 
 * IOperation: The class is responsible to create actions and which evaluates if a claim of an action is valid (i.e. evaluating the proof). In this case, it will write the action to the database/ DLT (i.e. Ethereum). Moreover it is repsonsible for rewarding participants, when a claim is evaluated as true. High-level one can think about it as something which addresses a specific problem, respectively, which is the solution of a specific problem. I.e. Having more green spaces in town (solution to a unlively urban environment). Hence this operation can generate different actions: plant a tree, plant flowers, do not cut trees etc. And take claims of this actions as an input.
 
-<a name=fin4_repo/>
+<a name=fin4repo/>
 # Fin4 Repository
 I a different repository, the [ fin4 ](https://github.com/FuturICT2/fin4-core) is found. This server is the core of the finance 4.0 infrastructure. It provides amongst others necessary APIs and business logic to deploy tokens, actions and claims to blockchain systems. 
 Clients can communicate with this server via the http protocol. 
