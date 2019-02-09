@@ -9,6 +9,7 @@ It uses the Genesis Library. If you are interested in the library, check out: ww
 
 <a name=installation/>
 # Installation
+
 * clone the repository to your pc
 * install adroid studio on our pc: https://developer.android.com/studio/index.html
 * open the project with android studio
