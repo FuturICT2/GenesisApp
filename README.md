@@ -23,6 +23,7 @@ It uses the Genesis Library. If you are interested in the library, check out: ww
 * Run the project, it will be deployed to your phone or emulator
 
 <a name=appfunctions/>
+
 # Functions of GenesisApp
 
 The app currently consists of four views. These will be explained in the following. 
@@ -52,6 +53,7 @@ In future, the user will be able to trade his or her
 tokens in this view. Moreover, projects can be listed, on which the user can spend his or her tokens (crowdsourcing etc.)
  
  <a name=firstrun/>
+ 
 # First Run
 * after starting the app, you will see your empty wallet
 * swipe left to the Creator
