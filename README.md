@@ -7,7 +7,7 @@ It uses the Genesis Library. If you are interested in the library, check out: ww
 
 - [Installation](#installation)
 - [AppFunctions](#appfunctions)
-- [First Run](#first_run)
+- [First Run](#firstrun)
 - [Implement own functionalities](#ownfunctionalities)
 - [Http requests to Fin4 server](#fin4repo)
 
