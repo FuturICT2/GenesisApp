@@ -16,10 +16,10 @@ It uses the Genesis Library. If you are interested in the library, check out: ww
 
 # Installation
 
-* clone the repository to your pc
-* install adroid studio on our pc: https://developer.android.com/studio/index.html
+* clone the repository
+* install adroid studio: https://developer.android.com/studio/index.html
 * open the project with android studio
-* Connect a phone through usb to your pc or start an emulator
+* Connect a phone through via usb or start an emulator
 * Run the project, it will be deployed to your phone or emulator
 
 <a name=appfunctions/>
@@ -28,7 +28,7 @@ It uses the Genesis Library. If you are interested in the library, check out: ww
 
 The app currently consists of four views. These will be explained in the following. 
 
-## Token crator
+## Token creator
 
 The creator view allows the user to create a new token with different properties, underlyings and operations. Currently only basic properties can be defined:
 * name: Name of the Token
@@ -66,6 +66,7 @@ tokens in this view. Moreover, projects can be listed, on which the user can spe
 </p>
 
 <a name=ownfunctionalities/>
+
 # How to utilize the App to implement your own Functionalities (BIOTS Challenges 2018 - still interesting for BETH 2019)
 
 In the following, we briefly explain, how the Genesis AndroidApp and the Genesis library can be used to boost your development process. 
@@ -107,6 +108,7 @@ Afterwards you will be able to test your token on the phone :)
 * IOperation: The class is responsible to create actions and which evaluates if a claim of an action is valid (i.e. evaluating the proof). In this case, it will write the action to the database/ DLT (i.e. Ethereum). Moreover it is repsonsible for rewarding participants, when a claim is evaluated as true. High-level one can think about it as something which addresses a specific problem, respectively, which is the solution of a specific problem. I.e. Having more green spaces in town (solution to a unlively urban environment). Hence this operation can generate different actions: plant a tree, plant flowers, do not cut trees etc. And take claims of this actions as an input.
 
 <a name=fin4repo/>
+
 # Fin4 Repository
 I a different repository, the [ fin4 ](https://github.com/FuturICT2/fin4-core) is found. This server is the core of the finance 4.0 infrastructure. It provides amongst others necessary APIs and business logic to deploy tokens, actions and claims to blockchain systems. 
 Clients can communicate with this server via the http protocol. 
