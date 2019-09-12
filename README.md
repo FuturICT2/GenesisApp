@@ -1,3 +1,7 @@
+⚠️ *This repository is no longer active. Together with other strands of work it is further pursued here: [FIN4XPLORER](https://github.com/FuturICT2/FIN4XPLORER)*
+
+<hr>
+
 # GenesisApp
 
 Mobile Application, which allows the user to create, deploy, utilize and obtain tokens.
